@@ -18,21 +18,39 @@ def log_answer(data_file,number,q_type,answer,correct):
 	data_file.write("Question #%d, Type: %d, Answered: %s, %s\n"%(number,q_type,answer,correct))
 	data_file.flush()
 
-def tutor(data_file):
+def log_data(data,per,tot,cor):
+	data.seek(0)
+	data.truncate()
+	data.write("%d\n"%per)
+	data.write("%d\n"%tot)
+	data.write("%d\n"%cor)
+
+def tutor(data_file, data_1, data_2):
 	count = 0
 	i = 1
 	new = True
-	global add_per, mult_per
-	global add_cor, mult_cor
-	global add_tot, mult_tot
-	add_per = 100
-	mult_per = 100
-	add_cor = 0
-	mult_cor = 0
-	add_tot = 0
-	mult_tot = 0
 
-	while i in range(1,8):
+	if not data_1.readline():
+		per1 = 100
+		tot1 = 0
+		cor1 = 0
+	else:
+		data_1.seek(0)
+		per1 = int(data_1.readline())
+		tot1 = int(data_1.readline())
+		cor1 = int(data_1.readline())
+
+	if not data_2.readline():
+		per2 = 100
+		tot2 = 0
+		cor2 = 0
+	else:
+		data_2.seek(0)
+		per2 = int(data_2.readline())
+		tot2 = int(data_2.readline())
+		cor2 = int(data_2.readline())
+
+	while i in range(1,10):
 		
 		correct = False
 
@@ -46,16 +64,16 @@ def tutor(data_file):
 				b = random.randint(0, 12)
 
 		if q_type is 0:
-			add_tot += 1
+			tot1 += 1
 		else:
-			mult_tot += 1
+			tot2 += 1
 
 		new = False
 
 		val = False
 		while not val:
 			if q_type is 0:
-				goNao.genSpeech("What is %d + %d?"%(a, b))
+				goNao.genSpeech("What is %d plus %d?"%(a, b))
 				time.sleep(2)
 				answer = a + b
 				human_choice = raw_input("What is %d + %d? "%(a, b))
@@ -75,14 +93,15 @@ def tutor(data_file):
 			count = 0
 			goNao.assess("correct")
 			if q_type is 0:
-				add_cor += 1
+				cor1 += 1
 			else:
-				mult_cor += 1
+				cor2 += 1
+		
 		else:
 			if q_type is 0:
-				add_per = (add_cor/add_tot) * 100
+				per1 = (float(cor1)/float(tot1)) * 100
 			else:
-				mult_per = (mult_cor/mult_tot) * 100
+				per2 = (float(cor2)/float(tot2)) * 100
 			count = count + 1
 			if count > 3:
 				goNao.assess("trouble")
@@ -91,9 +110,9 @@ def tutor(data_file):
 					goNao.genSpeech("I have a fun game for you.")
 					time.sleep(60)
 					goNao.genSpeech("That was fun! Now let's get back to work.")
-			elif q_type is 0 and add_per < 70 and add_tot > 3:
+			elif q_type is 0 and per1 < 70 and tot1 > 10:
 				goNao.assess("trouble_add")
-			elif q_type is 1 and mult_per < 70 and mult_tot > 3:
+			elif q_type is 1 and per2 < 70 and tot2 > 10:
 				goNao.assess("trouble_mult")
 			else:
 				goNao.assess("wrong")
@@ -103,12 +122,14 @@ def tutor(data_file):
 		if (correct == True):
 			i = i + 1
 
-	if add_tot is not 0:
-		add_per = (float(add_cor)/float(add_tot)) * 100
-	if mult_tot is not 0:
-		mult_per = (float(mult_cor)/float(mult_tot)) * 100
-	data_file.write("Addition: %d\n"%add_per)
-	data_file.write("Multiplication: %d\n"%mult_per)
+	if tot1 is not 0:
+		per1 = (float(cor1)/float(tot1)) * 100
+	if tot2 is not 0:
+		per2 = (float(cor2)/float(tot2)) * 100
+	
+	log_data(data_1,per1,tot1,cor1)
+	log_data(data_2,per2,tot2,cor2)
+	
 	goNao.goodbye()
 
 #Get the Nao's IP
@@ -169,6 +190,10 @@ elif(choice == "s"):
     participant_name = raw_input('Input participant\'s name: ').replace("\n","").replace("\r","")
     if os.path.exists("data/%s.txt"%participant_name):
     	data_file = open("data/%s.txt"%participant_name,"a")
+    	data_1 = open("data/%s_1.txt"%participant_name,"w")
+    	data_2 = open("data/%s_2.txt"%participant_name,"w")
+    	data_1.close()
+    	data_2.close()
     else:
     	data_file = open("data/%s.txt"%participant_name,"a")
     	data_file.write("%s\n"%participant_name)
@@ -177,13 +202,16 @@ elif(choice == "s"):
     data_file.write("%s\n" % today)
     data_file.flush()
 
+    data_1 = open("data/%s_1.txt"%participant_name,"r+")
+    data_2 = open("data/%s_2.txt"%participant_name,"r+")
+
     goNao.intro()
     postureProxy.goToPosture("SitRelax", 1.0)
 
     goNao.genSpeech("Shall we get started, %s?"%participant_name)
     time.sleep(2)
 
-    tutor(data_file)
+    tutor(data_file, data_1, data_2)
     postureProxy.goToPosture("SitRelax", 1.0)
 
     goNao.releaseNao()
