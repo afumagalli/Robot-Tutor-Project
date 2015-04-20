@@ -17,8 +17,10 @@ trouble = ['Sorry, that is not right. Do you want to take a break?',
 'No, that is not the right answer. Maybe we should take a break?',
 'Sorry, you missed it. Want to take a break and try again later?']
 
-trouble_add = ['You seem to be having some trouble with addition. Would you like a hint?']
+hint = ['You seem to be having some trouble. Would you like a hint?']
 
-trouble_mult = ['Would you like a hint that will help you with multiplication?']
+confused = ['You usually do well with these questions. Try it again!',
+'You know how to do this, just try once more!',
+'I know you have got this. Try again!']
 
 finish = "Great work today! Let's check in next week."

@@ -13,7 +13,6 @@ BASEPATH="/home/nao/behaviors/"
 
 import animacyStrings as anim
 
-#____________________________________________________________
 
 class Gesture:
     def __init__(self, host, port):
@@ -29,10 +28,11 @@ class Gesture:
         self.right = anim.right
         self.wrong = anim.wrong
         self.trouble = anim.trouble
-        self.trouble_add = anim.trouble_add
-        self.trouble_mult = anim.trouble_mult
+        self.hint = anim.hint
+        self.confused = anim.confused
         self.connectNao()
-    #initialize all nao devices____________________________________________________________
+    
+    
     def connectNao(self):
         #FRAME MANAGER FOR CALLING BEHAVIORS
         try:
@@ -71,26 +71,26 @@ class Gesture:
             print "Error when creating speech device proxy:"+str(e)
             exit(1)
 
-    #SAY A SENTENCE___________________________________________________________________________________
+
     def genSpeech(self, sentence):
         try:
             self.speechDevice.post.say(sentence)
         except Exception, e:
             print "Error when saying a sentence: "+str(e)
 
-    #____________________________________________________________       
+     
     def send_command(self, doBehavior):
         gesture_path = BASEPATH + doBehavior
         gesture_id   = self.frame.newBehaviorFromFile(gesture_path, "")
         self.frame.playBehavior(gesture_id)
         self.frame.completeBehavior(gesture_id)
 
+
     def goodbye(self):
         self.genSpeech(anim.finish)
         time.sleep(5)
         self.posture.goToPosture("SitRelax", 1.0)
 
-    #____________________________________________________________
 
     def intro(self):
         self.posture.goToPosture("Stand", 1.0)
@@ -101,33 +101,35 @@ class Gesture:
         self.genSpeech("Let's work on some math problems together.")
         time.sleep(8)
 
+
     def assess(self, what):
-        if(what is "correct"): # STUDENT GOT ANSWER CORRECT
+        if(what is "correct"):
             randnr = random.randint(0,len(self.right)-1)
             self.genSpeech(self.right[randnr])
             time.sleep(3)
-        elif(what is "wrong"): # STUDENT GOT ANSWER WRONG  
+        elif(what is "wrong"):
             randnr = random.randint(0,len(self.wrong)-1)
             self.genSpeech(self.wrong[randnr])
             time.sleep(3)
-        elif(what is "trouble"): # STUDENT GOT MANY WRONG
+        elif(what is "trouble"):
             randnr = random.randint(0,len(self.trouble)-1)
             self.genSpeech(self.trouble[randnr])
             time.sleep(3)
-        elif(what is "trouble_add"):
-            randnr = random.randint(0,len(self.trouble_add)-1)
-            self.genSpeech(self.trouble_add[randnr])
+        elif(what is "hint"): 
+            randnr = random.randint(0,len(self.hint)-1)
+            self.genSpeech(self.hint[randnr])
             time.sleep(3)
-        elif(what is "trouble_mult"):
-            randnr = random.randint(0,len(self.trouble_mult)-1)
-            self.genSpeech(self.trouble_mult[randnr])
+        elif(what is "confused"):
+            randnr = random.randint(0,len(self.confused)-1)
+            self.genSpeech(self.confused[randnr])
             time.sleep(3)
+
 
     def ask(self, question):
         self.genSpeech(question)
         time.sleep(2)
 
-    # RELEASE THE JOINTS SO IT WON'T COMPLAIN
+   
     def releaseNao(self):
         try:
             self.posture.goToPosture("SitRelax", 1.0)

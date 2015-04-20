@@ -1,13 +1,53 @@
 Tony
 ------------
-2015-03-25 16:50:34.570496
-Question #1, Type: 0, Answered: 126, True
-Question #2, Type: 1, Answered: 0, True
-Question #3, Type: 1, Answered: 121, True
-Question #4, Type: 1, Answered: 90, True
-Question #5, Type: 1, Answered: 72, True
-Question #6, Type: 0, Answered: 142, True
-Question #7, Type: 0, Answered: 57, True
-Addition: 100
-Multiplication: 100
+2015-04-16 16:04:54.476638
+Question #1, Type: 1, Answered: 100, True
+Question #2, Type: 0, Answered: 92, True
+Question #3, Type: 1, Answered: 36, True
+Question #4, Type: 0, Answered: 15, True
+Question #5, Type: 0, Answered: 43, True
+Question #6, Type: 1, Answered: 45, True
+Question #7, Type: 0, Answered: 126, True
+Question #8, Type: 1, Answered: 32, True
+Question #9, Type: 1, Answered: 12, True
+
+------------
+2015-04-16 16:08:48.298079
+------------
+2015-04-16 16:10:38.606437
+------------
+2015-04-16 16:12:00.922852
+Question #1, Type: 1, Answered: 54, True
+Question #2, Type: 0, Answered: 60, True
+------------
+2015-04-16 16:20:47.917019
+Question #1, Type: 1, Answered: 8, True
+Question #2, Type: 1, Answered: 8, True
+Question #3, Type: 1, Answered: 35, False
+Question #3, Type: 1, Answered: 25, True
+Question #4, Type: 0, Answered: 98, False
+Question #4, Type: 0, Answered: 128, True
+Question #5, Type: 1, Answered: 14, True
+Question #6, Type: 0, Answered: 59, True
+Question #7, Type: 0, Answered: 22, False
+Question #7, Type: 0, Answered: 32, True
+Question #8, Type: 1, Answered: 45, False
+Question #8, Type: 1, Answered: 40, True
+Question #9, Type: 1, Answered: 120, True
+
+------------
+2015-04-16 16:41:52.736817
+Question #1, Type: 0, Answered: 138, False
+Question #1, Type: 0, Answered: 128, True
+Question #2, Type: 0, Answered: 146, True
+Question #3, Type: 0, Answered: 17, False
+Question #3, Type: 0, Answered: 134, False
+Question #3, Type: 0, Answered: 124, True
+Question #4, Type: 1, Answered: 42, True
+Question #5, Type: 1, Answered: 0, True
+Question #6, Type: 0, Answered: 118, True
+Question #7, Type: 0, Answered: 82, True
+Question #8, Type: 1, Answered: 100, False
+Question #8, Type: 1, Answered: 110, True
+Question #9, Type: 0, Answered: 102, True
 

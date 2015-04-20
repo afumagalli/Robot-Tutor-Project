@@ -5,6 +5,7 @@ import random
 import time
 import datetime
 import collections
+import socket
 
 import naoqi
 from naoqi import ALBroker
@@ -14,9 +15,9 @@ from naoqi import ALBehavior
 
 from tutorMotions import *
 
-def log_answer(data_file,number,q_type,answer,correct):
-	data_file.write("Question #%d, Type: %d, Answered: %s, %s\n"%(number,q_type,answer,correct))
-	data_file.flush()
+def log_answer(history,number,q_type,answer,correct):
+	history.write("Question #%d, Type: %d, Answered: %s, %s\n"%(number,q_type,answer,correct))
+	history.flush()
 
 def log_data(data,per,tot,cor):
 	data.seek(0)
@@ -25,32 +26,32 @@ def log_data(data,per,tot,cor):
 	data.write("%d\n"%tot)
 	data.write("%d\n"%cor)
 
-def tutor(data_file, data_1, data_2):
-	count = 0
+def tutor(history, data, categ):
 	i = 1
 	new = True
+	wrong = []
+	per = []
+	tot = []
+	cor = []
 
-	if not data_1.readline():
-		per1 = 100
-		tot1 = 0
-		cor1 = 0
-	else:
-		data_1.seek(0)
-		per1 = int(data_1.readline())
-		tot1 = int(data_1.readline())
-		cor1 = int(data_1.readline())
-
-	if not data_2.readline():
-		per2 = 100
-		tot2 = 0
-		cor2 = 0
-	else:
-		data_2.seek(0)
-		per2 = int(data_2.readline())
-		tot2 = int(data_2.readline())
-		cor2 = int(data_2.readline())
+	for j in range(categ):
+		wrong.append(0)
+		if not data[j].readline():
+			per.append(100)
+			tot.append(0)
+			cor.append(0)
+		else:
+			data[j].seek(0)
+			per.append(int(data[j].readline()))
+			tot.append(int(data[j].readline()))
+			cor.append(int(data[j].readline()))
 
 	while i in range(1,10):
+
+		#s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		#data = s.recv(32)
+		#print data
+		#s.close()
 		
 		correct = False
 
@@ -63,14 +64,11 @@ def tutor(data_file, data_1, data_2):
 				a = random.randint(0, 12)
 				b = random.randint(0, 12)
 
-		if q_type is 0:
-			tot1 += 1
-		else:
-			tot2 += 1
+		tot[q_type] += 1
 
 		new = False
-
 		val = False
+		
 		while not val:
 			if q_type is 0:
 				goNao.genSpeech("What is %d plus %d?"%(a, b))
@@ -90,47 +88,47 @@ def tutor(data_file, data_1, data_2):
 		if int(human_choice) == answer:
 			correct = True
 			new = True
-			count = 0
+			wrong[q_type] = 0
+			cor[q_type] += 1
 			goNao.assess("correct")
-			if q_type is 0:
-				cor1 += 1
-			else:
-				cor2 += 1
 		
 		else:
-			if q_type is 0:
-				per1 = (float(cor1)/float(tot1)) * 100
-			else:
-				per2 = (float(cor2)/float(tot2)) * 100
-			count = count + 1
-			if count > 3:
+			per[q_type] = (float(cor[q_type])/float(tot[q_type])) * 100
+			wrong[q_type] = wrong[q_type] + 1
+			
+			if wrong[q_type] > 4:
 				goNao.assess("trouble")
 				break_choice = raw_input("Take a break? y for yes, n for no: ")
 				if break_choice is "y":
 					goNao.genSpeech("I have a fun game for you.")
-					time.sleep(60)
+					time.sleep(60) # play a game
 					goNao.genSpeech("That was fun! Now let's get back to work.")
-			elif q_type is 0 and per1 < 70 and tot1 > 10:
-				goNao.assess("trouble_add")
-			elif q_type is 1 and per2 < 70 and tot2 > 10:
-				goNao.assess("trouble_mult")
+			
+			elif per[q_type] < 70 and tot[q_type] > 10:
+				goNao.assess("hint")
+				hint_choice = raw_input("Would you like a hint? y for yes, n for no: ")
+				if hint_choice is "y":
+					goNao.genSpeech("I think I can help")
+					# give a hint
+
+			elif per[q_type] > 70 and tot[q_type] > 10:
+				goNao.assess("confused")
+			
 			else:
 				goNao.assess("wrong")
 
-		log_answer(data_file,i,q_type,human_choice,correct)
+		log_answer(history,i,q_type,human_choice,correct)
 		
 		if (correct == True):
 			i = i + 1
-
-	if tot1 is not 0:
-		per1 = (float(cor1)/float(tot1)) * 100
-	if tot2 is not 0:
-		per2 = (float(cor2)/float(tot2)) * 100
 	
-	log_data(data_1,per1,tot1,cor1)
-	log_data(data_2,per2,tot2,cor2)
+	for i in range(categ):
+		if tot[i] is not 0:
+			per[i] = (float(cor[i])/float(tot[i])) * 100
+		log_data(data[i],per[i],tot[i],cor[i])
 	
 	goNao.goodbye()
+
 
 #Get the Nao's IP
 ipAdd = None
@@ -141,6 +139,7 @@ except Exception as e:
     print "Could not open file ip.txt"
     ipAdd = raw_input("Please write Nao's IP address... ") 
 
+
 #Try to connect to it
 goNao = None
 try:
@@ -149,12 +148,14 @@ except Exception as e:
     print "Could not find nao. Check that your ip is correct (%s)" %ipAdd
     sys.exit()
 
+
 #Set postureProxy
 try:
     postureProxy = ALProxy("ALRobotPosture", ipAdd, 9559)
 except Exception, e:
     print "Could not create proxy to ALRobotPosture"
     print "Error was: ", e
+
 
 #Choose an action
 #Set all the possible commands
@@ -164,15 +165,18 @@ commands=collections.OrderedDict((("i","Run the intro"),
 ("s","Start tutoring interaction")
 ))
 
+
 #Output all the commands
 print "\nPlease choose an action:"
 for key,value in commands.items():
     print("\t%s => %s"%(key,value))
 
+
 #Have the user select the choice
 choice = ""
 if choice not in commands:
     choice = raw_input('Choice: ').replace("\n","").replace("\r","")
+
 
 #Execute the user's choice
 if(choice == "i"):
@@ -183,37 +187,46 @@ elif(choice=="r"):
     goNao.releaseNao()
 
 elif(choice == "t"):
-	data_file = open("data/Tony.txt","a")
-	tutor(data_file)
+	history = open("data/Tony.txt","a")
+	tutor(history)
 
 elif(choice == "s"):
     participant_name = raw_input('Input participant\'s name: ').replace("\n","").replace("\r","")
+    
+    with open('topics.txt') as f:
+    	categ = sum(1 for _ in f)
+    if categ != 2:
+    	print "Error"
+    	exit()
+
+    data = []
+    
     if os.path.exists("data/%s.txt"%participant_name):
-    	data_file = open("data/%s.txt"%participant_name,"a")
-    	data_1 = open("data/%s_1.txt"%participant_name,"w")
-    	data_2 = open("data/%s_2.txt"%participant_name,"w")
-    	data_1.close()
-    	data_2.close()
+    	history = open("data/%s.txt"%participant_name,"a")
+    
     else:
-    	data_file = open("data/%s.txt"%participant_name,"a")
-    	data_file.write("%s\n"%participant_name)
-    data_file.write("------------\n")
+    	history = open("data/%s.txt"%participant_name,"a")
+    	history.write("%s\n"%participant_name)
+    	for i in range(categ):
+    		open("data/%s_%d.txt"%(participant_name,i),"w")
+    
+    history.write("------------\n")
     today = datetime.datetime.now()
-    data_file.write("%s\n" % today)
-    data_file.flush()
+    history.write("%s\n" % today)
+    history.flush()
 
-    data_1 = open("data/%s_1.txt"%participant_name,"r+")
-    data_2 = open("data/%s_2.txt"%participant_name,"r+")
+    for i in range(categ):
+    	data.append(open("data/%s_%d.txt"%(participant_name,i),"r+"))
 
-    goNao.intro()
+    #goNao.intro()
     postureProxy.goToPosture("SitRelax", 1.0)
 
     goNao.genSpeech("Shall we get started, %s?"%participant_name)
     time.sleep(2)
 
-    tutor(data_file, data_1, data_2)
+    tutor(history, data, categ)
     postureProxy.goToPosture("SitRelax", 1.0)
 
     goNao.releaseNao()
-    data_file.write("\n")
-    data_file.close()
+    history.write("\n")
+    history.close()
