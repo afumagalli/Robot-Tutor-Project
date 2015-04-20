@@ -10,6 +10,6 @@ Senior project for CPSC 490 to code an adaptive robot tutor using a contextual b
 <b>Note:</b> If using a new topics.txt list, all previous data in the ./data folder must be wiped for accuracy
 <p>
 <b>Future additions:</b><p>
-  -Use of affect detection as feature vector<p>
-  -Database of hints for use in all question types<p>
-  -Broadening of animacy strings<p>
+-Use of affect detection as feature vector<p>
+-Database of hints for use in all question types<p>
+-Broadening of animacy strings<p>
