@@ -5,6 +5,7 @@ import random
 import time
 import datetime
 import collections
+import socket
 
 import naoqi
 from naoqi import ALBroker
@@ -25,6 +26,43 @@ def log_data(data,per,tot,cor):
 	data.write("%d\n"%tot)
 	data.write("%d\n"%cor)
 
+def socketHandler(clientsock,addr):
+	
+	while 1:
+		data = clientsock.recv(BUFSIZ)
+		print 'data from socket ' + data
+		if not data:
+			break
+		msg = data.rstrip()
+		msg = data.lstrip()
+		msg = data.strip()
+		print 'receive message: ' + msg
+
+		#set state to start over interaction
+		if ('startover' in msg):	
+			currentSceneName = "Intro"
+			print "startover MSG: " + msg
+			splitMsg = msg.split(':')
+			print "AFTER SPLITTING: " + splitMsg[1]
+			setRobot(1, "reset",0)
+			setRobot(2, "reset",0)
+			loadScript(splitMsg[1])
+			if interactionStartTime == 0:
+				interactionStartTime = rospy.get_rostime().secs
+			interactionState = STATE_PLAYING
+	
+		if (interactionState == STATE_WAITING_CHOICE):
+			currentSceneName = msg
+			interactionState = STATE_CHOICE_MADE
+			logAction("state", "STATE_CHOICE_MADE", 0)
+			logAction("choice", msg, 0)
+			setRobot(1, "reset",0)
+			setRobot(2, "reset",0)
+
+	if(data == "quit"):
+		clientsock.close()
+	clientsock.close()
+
 def tutor(history, data, categ):
 	i = 1
 	new = True
@@ -32,6 +70,25 @@ def tutor(history, data, categ):
 	per = []
 	tot = []
 	cor = []
+
+	HOST = ''   # Symbolic name, meaning all available interfaces
+	PORT = 4444 # Arbitrary non-privileged port
+	BUFSIZ = 1024
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	#new line to avoid waiting for binding
+	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+	print 'Socket created' 
+	#Bind socket to local host and port
+	try:
+		s.bind((HOST, PORT))
+	except socket.error as msg:
+		print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
+		sys.exit()
+    
+	print 'Socket bind complete'
 
 	for j in range(categ):
 		wrong.append(0)
