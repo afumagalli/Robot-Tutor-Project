@@ -26,43 +26,6 @@ def log_data(data,per,tot,cor):
 	data.write("%d\n"%tot)
 	data.write("%d\n"%cor)
 
-def socketHandler(clientsock,addr):
-	
-	while 1:
-		data = clientsock.recv(BUFSIZ)
-		print 'data from socket ' + data
-		if not data:
-			break
-		msg = data.rstrip()
-		msg = data.lstrip()
-		msg = data.strip()
-		print 'receive message: ' + msg
-
-		#set state to start over interaction
-		if ('startover' in msg):	
-			currentSceneName = "Intro"
-			print "startover MSG: " + msg
-			splitMsg = msg.split(':')
-			print "AFTER SPLITTING: " + splitMsg[1]
-			setRobot(1, "reset",0)
-			setRobot(2, "reset",0)
-			loadScript(splitMsg[1])
-			if interactionStartTime == 0:
-				interactionStartTime = rospy.get_rostime().secs
-			interactionState = STATE_PLAYING
-	
-		if (interactionState == STATE_WAITING_CHOICE):
-			currentSceneName = msg
-			interactionState = STATE_CHOICE_MADE
-			logAction("state", "STATE_CHOICE_MADE", 0)
-			logAction("choice", msg, 0)
-			setRobot(1, "reset",0)
-			setRobot(2, "reset",0)
-
-	if(data == "quit"):
-		clientsock.close()
-	clientsock.close()
-
 def tutor(history, data, categ):
 	i = 1
 	new = True
@@ -71,24 +34,14 @@ def tutor(history, data, categ):
 	tot = []
 	cor = []
 
-	HOST = ''   # Symbolic name, meaning all available interfaces
-	PORT = 4444 # Arbitrary non-privileged port
-	BUFSIZ = 1024
+	TCP_IP = '127.0.0.1'
+	TCP_PORT = 5006
+	BUFFER_SIZE = 1024
+	MESSAGE = "Session started!"
 
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-	#new line to avoid waiting for binding
-	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-	print 'Socket created' 
-	#Bind socket to local host and port
-	try:
-		s.bind((HOST, PORT))
-	except socket.error as msg:
-		print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-		sys.exit()
-    
-	print 'Socket bind complete'
+	s.connect((TCP_IP, TCP_PORT))
+	s.send(MESSAGE)
 
 	for j in range(categ):
 		wrong.append(0)
@@ -102,48 +55,28 @@ def tutor(history, data, categ):
 			tot.append(int(data[j].readline()))
 			cor.append(int(data[j].readline()))
 
-	while i in range(1,10):
-		
+	while 1:
+		data = s.recv(BUFFER_SIZE)
+		if not data:
+			break
+		if (data == "exit"):
+			break
+		q_type, help, answer, human_choice = data.split(' ')
+		q_type = int(q_type)
+		help = int(help)
+		answer = int(answer)
+		human_choice = int(human_choice)
+
 		correct = False
-
-		if new == True:
-			q_type = random.randint(0, 1)
-			if q_type is 0:
-				a = random.randint(0, 100)
-				b = random.randint(0, 100)
-			else:
-				a = random.randint(0, 12)
-				b = random.randint(0, 12)
-
 		tot[q_type] += 1
 
-		new = False
-		val = False
-		
-		while not val:
-			if q_type is 0:
-				goNao.genSpeech("What is %d plus %d?"%(a, b))
-				time.sleep(2)
-				answer = a + b
-				human_choice = raw_input("What is %d + %d? "%(a, b))
-			else:
-				goNao.genSpeech("What is %d times %d?"%(a, b))
-				time.sleep(2)
-				answer = a * b
-				human_choice = raw_input("What is %d * %d? "%(a, b))
-			if human_choice.isdigit():
-				val = True
-			else:
-				goNao.genSpeech("That's not a number!")
-
-		if int(human_choice) == answer:
+		if human_choice == answer:
 			correct = True
-			new = True
 			wrong[q_type] = 0
 			cor[q_type] += 1
 			goNao.assess("correct")
 
-		elif human_choice == "h":
+		elif help:
 			tot[q_type] -= 1
 			per[q_type] = (float(cor[q_type])/float(tot[q_type])) * 100
 			
@@ -179,9 +112,6 @@ def tutor(history, data, categ):
 				goNao.assess("wrong")
 
 		log_answer(history,i,q_type,human_choice,correct)
-		
-		if (correct == True):
-			i = i + 1
 	
 	for i in range(categ):
 		if tot[i] is not 0:
@@ -279,7 +209,7 @@ elif(choice == "s"):
     for i in range(categ):
     	data.append(open("data/%s_%d.txt"%(participant_name,i),"r+"))
 
-    goNao.intro()
+    #goNao.intro()
     postureProxy.goToPosture("SitRelax", 1.0)
 
     goNao.genSpeech("Shall we get started, %s?"%participant_name)

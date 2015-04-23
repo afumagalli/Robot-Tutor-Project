@@ -51,3 +51,33 @@ Question #8, Type: 1, Answered: 100, False
 Question #8, Type: 1, Answered: 110, True
 Question #9, Type: 0, Answered: 102, True
 
+------------
+2015-04-23 16:42:05.363037
+------------
+2015-04-23 16:43:56.194039
+------------
+2015-04-23 16:48:55.048868
+------------
+2015-04-23 16:49:35.735667
+------------
+2015-04-23 16:49:51.415197
+------------
+2015-04-23 16:51:07.901707
+------------
+2015-04-23 16:52:39.010331
+Question #1, Type: 0, Answered: 98, True
+Question #2, Type: 0, Answered: 98, False
+Question #2, Type: 0, Answered: 720, True
+Question #3, Type: 0, Answered: 720, True
+Question #4, Type: 0, Answered: 720, True
+Question #5, Type: 0, Answered: 720, True
+------------
+2015-04-23 16:54:49.734532
+Question #1, Type: 1, Answered: 8, True
+Question #2, Type: 1, Answered: 8, True
+------------
+2015-04-23 16:57:25.953003
+------------
+2015-04-23 16:57:59.767889
+Question #1, Type: 0, Answered: 86, True
+Question #1, Type: 0, Answered: 100, False

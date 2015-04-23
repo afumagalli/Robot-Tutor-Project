@@ -74,7 +74,7 @@ def tutor(history, data, categ):
 				time.sleep(2)
 				answer = a * b
 				human_choice = raw_input("What is %d * %d? "%(a, b))
-			if human_choice.isdigit():
+			if human_choice.isdigit() OR human_choice == 'h':
 				val = True
 			else:
 				goNao.genSpeech("That's not a number!")
