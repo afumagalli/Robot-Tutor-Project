@@ -2,6 +2,7 @@
 
 import socket
 import random
+import time
 
 from tutorMotions import *
 
@@ -49,7 +50,7 @@ print data
 #example with ten simple multiplication questions
 i = 1
 new = True
-while i in range(1,11):
+while i in range(1,4):
 
 	help = 0
 
@@ -89,6 +90,7 @@ while i in range(1,11):
 
 	data = q_type_s + " " + help_s + " " + answer_s + " " + human_choice
 	conn.send(data) #send to client
+	time.sleep(3)
 	if int(human_choice) == answer:
 		new = True
 		i = i + 1

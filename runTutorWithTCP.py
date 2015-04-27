@@ -56,12 +56,12 @@ def tutor(history, data, categ):
 			cor.append(int(data[j].readline()))
 
 	while 1:
-		data = s.recv(BUFFER_SIZE)
-		if not data:
+		msg = s.recv(BUFFER_SIZE)
+		if not msg:
 			break
-		if (data == "exit"):
+		if (msg == "exit"):
 			break
-		q_type, help, answer, human_choice = data.split(' ')
+		q_type, help, answer, human_choice = msg.split(' ')
 		q_type = int(q_type)
 		help = int(help)
 		answer = int(answer)
@@ -192,14 +192,14 @@ elif(choice == "s"):
 
     data = []
     
-    if os.path.exists("data/%s.txt"%participant_name):
-    	history = open("data/%s.txt"%participant_name,"a")
+    if os.path.exists("data_TCP/%s.txt"%participant_name):
+    	history = open("data_TCP/%s.txt"%participant_name,"a")
     
     else:
-    	history = open("data/%s.txt"%participant_name,"a")
+    	history = open("data_TCP/%s.txt"%participant_name,"a")
     	history.write("%s\n"%participant_name)
     	for i in range(categ):
-    		open("data/%s_%d.txt"%(participant_name,i),"w")
+    		open("data_TCP/%s_%d.txt"%(participant_name,i),"w")
     
     history.write("------------\n")
     today = datetime.datetime.now()
@@ -207,7 +207,7 @@ elif(choice == "s"):
     history.flush()
 
     for i in range(categ):
-    	data.append(open("data/%s_%d.txt"%(participant_name,i),"r+"))
+    	data.append(open("data_TCP/%s_%d.txt"%(participant_name,i),"r+"))
 
     #goNao.intro()
     postureProxy.goToPosture("SitRelax", 1.0)

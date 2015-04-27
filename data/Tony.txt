@@ -1,83 +1,14 @@
 Tony
 ------------
-2015-04-16 16:04:54.476638
-Question #1, Type: 1, Answered: 100, True
-Question #2, Type: 0, Answered: 92, True
-Question #3, Type: 1, Answered: 36, True
-Question #4, Type: 0, Answered: 15, True
-Question #5, Type: 0, Answered: 43, True
-Question #6, Type: 1, Answered: 45, True
-Question #7, Type: 0, Answered: 126, True
-Question #8, Type: 1, Answered: 32, True
-Question #9, Type: 1, Answered: 12, True
+2015-04-27 12:35:18.455184
+Question #1, Type: 1, Answered: 30, True
+Question #2, Type: 0, Answered: 163, True
+Question #3, Type: 1, Answered: 3, True
+Question #4, Type: 0, Answered: 44, True
+Question #5, Type: 0, Answered: 54, True
+Question #6, Type: 0, Answered: 99, True
+Question #7, Type: 0, Answered: 187, False
+Question #7, Type: 0, Answered: 181, True
+Question #8, Type: 0, Answered: 147, True
+Question #9, Type: 1, Answered: 30, True
 
-------------
-2015-04-16 16:08:48.298079
-------------
-2015-04-16 16:10:38.606437
-------------
-2015-04-16 16:12:00.922852
-Question #1, Type: 1, Answered: 54, True
-Question #2, Type: 0, Answered: 60, True
-------------
-2015-04-16 16:20:47.917019
-Question #1, Type: 1, Answered: 8, True
-Question #2, Type: 1, Answered: 8, True
-Question #3, Type: 1, Answered: 35, False
-Question #3, Type: 1, Answered: 25, True
-Question #4, Type: 0, Answered: 98, False
-Question #4, Type: 0, Answered: 128, True
-Question #5, Type: 1, Answered: 14, True
-Question #6, Type: 0, Answered: 59, True
-Question #7, Type: 0, Answered: 22, False
-Question #7, Type: 0, Answered: 32, True
-Question #8, Type: 1, Answered: 45, False
-Question #8, Type: 1, Answered: 40, True
-Question #9, Type: 1, Answered: 120, True
-
-------------
-2015-04-16 16:41:52.736817
-Question #1, Type: 0, Answered: 138, False
-Question #1, Type: 0, Answered: 128, True
-Question #2, Type: 0, Answered: 146, True
-Question #3, Type: 0, Answered: 17, False
-Question #3, Type: 0, Answered: 134, False
-Question #3, Type: 0, Answered: 124, True
-Question #4, Type: 1, Answered: 42, True
-Question #5, Type: 1, Answered: 0, True
-Question #6, Type: 0, Answered: 118, True
-Question #7, Type: 0, Answered: 82, True
-Question #8, Type: 1, Answered: 100, False
-Question #8, Type: 1, Answered: 110, True
-Question #9, Type: 0, Answered: 102, True
-
-------------
-2015-04-23 16:42:05.363037
-------------
-2015-04-23 16:43:56.194039
-------------
-2015-04-23 16:48:55.048868
-------------
-2015-04-23 16:49:35.735667
-------------
-2015-04-23 16:49:51.415197
-------------
-2015-04-23 16:51:07.901707
-------------
-2015-04-23 16:52:39.010331
-Question #1, Type: 0, Answered: 98, True
-Question #2, Type: 0, Answered: 98, False
-Question #2, Type: 0, Answered: 720, True
-Question #3, Type: 0, Answered: 720, True
-Question #4, Type: 0, Answered: 720, True
-Question #5, Type: 0, Answered: 720, True
-------------
-2015-04-23 16:54:49.734532
-Question #1, Type: 1, Answered: 8, True
-Question #2, Type: 1, Answered: 8, True
-------------
-2015-04-23 16:57:25.953003
-------------
-2015-04-23 16:57:59.767889
-Question #1, Type: 0, Answered: 86, True
-Question #1, Type: 0, Answered: 100, False

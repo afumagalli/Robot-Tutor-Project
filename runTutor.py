@@ -74,7 +74,7 @@ def tutor(history, data, categ):
 				time.sleep(2)
 				answer = a * b
 				human_choice = raw_input("What is %d * %d? "%(a, b))
-			if human_choice.isdigit() OR human_choice == 'h':
+			if human_choice.isdigit() or human_choice == 'h':
 				val = True
 			else:
 				goNao.genSpeech("That's not a number!")
@@ -222,7 +222,7 @@ elif(choice == "s"):
     for i in range(categ):
     	data.append(open("data/%s_%d.txt"%(participant_name,i),"r+"))
 
-    goNao.intro()
+    #goNao.intro()
     postureProxy.goToPosture("SitRelax", 1.0)
 
     goNao.genSpeech("Shall we get started, %s?"%participant_name)
