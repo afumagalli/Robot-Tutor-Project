@@ -1,91 +1,87 @@
 Tony
 ------------
 2015-04-27 12:42:35.270205
-Question #1, Type: 0, Answered: 105, True
-Question #1, Type: 1, Answered: 15, True
-Question #1, Type: 0, Answered: 44, True
-Question #1, Type: 0, Answered: 58, False
-Question #1, Type: 0, Answered: 57, True
-Question #1, Type: 0, Answered: 48, True
-Question #1, Type: 0, Answered: 34, True
-Question #1, Type: 0, Answered: 171, True
-Question #1, Type: 0, Answered: 85, True
-Question #1, Type: 0, Answered: 147, True
-Question #1, Type: 1, Answered: 0, True
+Type: 0, Answered: 105, True
+Type: 1, Answered: 15, True
+Type: 0, Answered: 44, True
+Type: 0, Answered: 58, False
+Type: 0, Answered: 57, True
+Type: 0, Answered: 48, True
+Type: 0, Answered: 34, True
+Type: 0, Answered: 171, True
+Type: 0, Answered: 85, True
+Type: 0, Answered: 147, True
+Type: 1, Answered: 0, True
 
 ------------
 2015-04-27 12:44:33.849778
-Question #1, Type: 1, Answered: 54, True
-Question #1, Type: 1, Answered: 0, True
-Question #1, Type: 1, Answered: 30, True
-Question #1, Type: 1, Answered: 0, True
-Question #1, Type: 0, Answered: 123, True
-Question #1, Type: 1, Answered: 33, True
-Question #1, Type: 0, Answered: 164, True
-Question #1, Type: 0, Answered: 67, True
-Question #1, Type: 1, Answered: 0, True
-Question #1, Type: 0, Answered: 117, True
+Type: 1, Answered: 54, True
+Type: 1, Answered: 0, True
+Type: 1, Answered: 30, True
+Type: 1, Answered: 0, True
+Type: 0, Answered: 123, True
+Type: 1, Answered: 33, True
+Type: 0, Answered: 164, True
+Type: 0, Answered: 67, True
+Type: 1, Answered: 0, True
+Type: 0, Answered: 117, True
 
 ------------
 2015-04-27 12:48:04.937319
-Question #1, Type: 0, Answered: 82, True
+Type: 0, Answered: 82, True
 
-------------
-2015-04-27 12:48:58.780488
 ------------
 2015-04-27 12:49:13.843996
-Question #1, Type: 0, Answered: 94, True
+Type: 0, Answered: 94, True
 
 ------------
-2015-04-27 12:49:44.619094
-------------
 2015-04-27 12:50:09.434492
-Question #1, Type: 1, Answered: 12, True
+Type: 1, Answered: 12, True
 
 ------------
 2015-04-27 12:51:14.967295
-Question #1, Type: 1, Answered: 15, True
-Question #1, Type: 0, Answered: 33, True
-Question #1, Type: 0, Answered: 83, True
+Type: 1, Answered: 15, True
+Type: 0, Answered: 33, True
+Type: 0, Answered: 83, True
 
 ------------
 2015-04-29 14:44:47.082623
-Question #1, Type: 0, Answered: 98, True
-Question #1, Type: 0, Answered: 105, False
-Question #1, Type: 0, Answered: 139, True
-Question #1, Type: 0, Answered: 5, True
+Type: 0, Answered: 98, True
+Type: 0, Answered: 105, False
+Type: 0, Answered: 139, True
+Type: 0, Answered: 5, True
 
 ------------
 2015-04-29 14:48:47.553299
-Question #1, Type: 1, Answered: 6, True
+Type: 1, Answered: 6, True
 
 ------------
 2015-04-29 14:50:20.520061
-Question #1, Type: 0, Answered: 45, True
+Type: 0, Answered: 45, True
 
 ------------
 2015-04-29 14:51:44.099601
-Question #1, Type: 1, Answered: 30, True
-Question #1, Type: 0, Answered: 69, True
-Question #1, Type: 1, Answered: 99, True
-Question #1, Type: 1, Answered: 44, True
-Question #1, Type: 1, Answered: 40, True
-Question #1, Type: 1, Answered: 0, True
-Question #1, Type: 0, Answered: 118, True
-Question #1, Type: 0, Answered: 183, True
+Type: 1, Answered: 30, True
+Type: 0, Answered: 69, True
+Type: 1, Answered: 99, True
+Type: 1, Answered: 44, True
+Type: 1, Answered: 40, True
+Type: 1, Answered: 0, True
+Type: 0, Answered: 118, True
+Type: 0, Answered: 183, True
 ------------
 2015-04-29 14:55:48.051562
-Question #1, Type: 0, Answered: 129, True
-Question #1, Type: 0, Answered: 121, True
-Question #1, Type: 1, Answered: 48, True
-Question #1, Type: 0, Answered: 97, True
-Question #1, Type: 1, Answered: 20, True
-Question #1, Type: 0, Answered: 92, True
-Question #1, Type: 0, Answered: 64, True
-Question #1, Type: 1, Answered: 44, True
-Question #1, Type: 1, Answered: 77, True
+Type: 0, Answered: 129, True
+Type: 0, Answered: 121, True
+Type: 1, Answered: 48, True
+Type: 0, Answered: 97, True
+Type: 1, Answered: 20, True
+Type: 0, Answered: 92, True
+Type: 0, Answered: 64, True
+Type: 1, Answered: 44, True
+Type: 1, Answered: 77, True
 
 ------------
 2015-04-29 14:57:52.960728
-Question #1, Type: 1, Answered: 0, True
+Type: 1, Answered: 0, True
 

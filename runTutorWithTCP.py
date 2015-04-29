@@ -15,8 +15,8 @@ from naoqi import ALBehavior
 
 from tutorMotions import *
 
-def log_answer(history,number,q_type,answer,correct):
-	history.write("Question #%d, Type: %d, Answered: %s, %s\n"%(number,q_type,answer,correct))
+def log_answer(history,q_type,answer,correct):
+	history.write("Type: %d, Answered: %s, %s\n"%(q_type,answer,correct))
 	history.flush()
 
 def log_data(data,per,tot,cor):
@@ -111,7 +111,7 @@ def tutor(history, data, categ):
 			else:
 				goNao.assess("wrong")
 
-		log_answer(history,i,q_type,human_choice,correct)
+		log_answer(history,q_type,human_choice,correct)
 	
 	for i in range(categ):
 		if tot[i] is not 0:
