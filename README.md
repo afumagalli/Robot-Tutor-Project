@@ -2,10 +2,11 @@
 Senior project for CPSC 490 to code an adaptive robot tutor using a contextual bandit approach
 <p>
 <b>Instructions:</b> <p>
-1) Install naoqi Python SDK (see instructions here: http://doc.aldebaran.com/1-14/dev/python/install_guide.html) <p>
+1a) Install naoqi Python SDK (see instructions here: http://doc.aldebaran.com/1-14/dev/python/install_guide.html) <p>
+1b) Install easygui (see instructions here: http://sourceforge.net/projects/easygui/files/0.97/) <p>
 2) Turn on Nao and get IP address (press center button). Make sure IP in ip.txt is correct.<p>
-3) If using TCP, establish your TCP server (for demo, run the tutor_TCPserver.py file)
-   Run the runTutor.py or runTutorWithTCP.py file in Python <p>
+3a) If using TCP, establish your TCP server (for demo, run the tutor_TCPserver.py file)<p>
+3b) Run the runTutor.py or runTutorWithTCP.py file in Python <p>
 4) Select s to start a tutroing interaction <p>
 5) Answer questions in Terminal or through your TCP server <p>
 <p>
