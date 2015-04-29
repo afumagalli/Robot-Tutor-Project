@@ -48,3 +48,44 @@ Question #1, Type: 1, Answered: 15, True
 Question #1, Type: 0, Answered: 33, True
 Question #1, Type: 0, Answered: 83, True
 
+------------
+2015-04-29 14:44:47.082623
+Question #1, Type: 0, Answered: 98, True
+Question #1, Type: 0, Answered: 105, False
+Question #1, Type: 0, Answered: 139, True
+Question #1, Type: 0, Answered: 5, True
+
+------------
+2015-04-29 14:48:47.553299
+Question #1, Type: 1, Answered: 6, True
+
+------------
+2015-04-29 14:50:20.520061
+Question #1, Type: 0, Answered: 45, True
+
+------------
+2015-04-29 14:51:44.099601
+Question #1, Type: 1, Answered: 30, True
+Question #1, Type: 0, Answered: 69, True
+Question #1, Type: 1, Answered: 99, True
+Question #1, Type: 1, Answered: 44, True
+Question #1, Type: 1, Answered: 40, True
+Question #1, Type: 1, Answered: 0, True
+Question #1, Type: 0, Answered: 118, True
+Question #1, Type: 0, Answered: 183, True
+------------
+2015-04-29 14:55:48.051562
+Question #1, Type: 0, Answered: 129, True
+Question #1, Type: 0, Answered: 121, True
+Question #1, Type: 1, Answered: 48, True
+Question #1, Type: 0, Answered: 97, True
+Question #1, Type: 1, Answered: 20, True
+Question #1, Type: 0, Answered: 92, True
+Question #1, Type: 0, Answered: 64, True
+Question #1, Type: 1, Answered: 44, True
+Question #1, Type: 1, Answered: 77, True
+
+------------
+2015-04-29 14:57:52.960728
+Question #1, Type: 1, Answered: 0, True
+

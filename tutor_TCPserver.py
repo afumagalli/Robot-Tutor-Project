@@ -3,6 +3,7 @@
 import socket
 import random
 import time
+import easygui
 
 from tutorMotions import *
 
@@ -50,7 +51,7 @@ print data
 #example with ten simple multiplication questions
 i = 1
 new = True
-while i in range(1,4):
+while i in range(1,10):
 
 	help = 0
 
@@ -71,13 +72,17 @@ while i in range(1,4):
 			goNao.genSpeech("What is %d plus %d?"%(a, b))
 			time.sleep(2)
 			answer = a + b
-			human_choice = raw_input("What is %d + %d? "%(a, b))
+			human_choice = easygui.enterbox("What is %d + %d? "%(a, b))
+			#human_choice = raw_input("What is %d + %d? "%(a, b))
 		else:
 			goNao.genSpeech("What is %d times %d?"%(a, b))
 			time.sleep(2)
 			answer = a * b
-			human_choice = raw_input("What is %d * %d? "%(a, b))
-		if human_choice.isdigit():
+			human_choice = easygui.enterbox("What is %d * %d? "%(a, b))
+			#human_choice = raw_input("What is %d * %d? "%(a, b))
+		if not human_choice:
+			goNao.genSpeech("That's not a number!")
+		elif human_choice.isdigit():
 			val = True
 		elif human_choice == "h":
 			help = 1
@@ -95,7 +100,7 @@ while i in range(1,4):
 		new = True
 		i = i + 1
 
-raw_input("Press enter to end session.")
+easygui.msgbox("Press OK to end session.")
 data = 'exit'
 conn.send(data)   
 conn.close()
